@@ -8,7 +8,7 @@ import org.u410.genesis.Genesis;
 import org.u410.genesis.utils.ColourUtils;
 
 public class ChatListener implements Listener {
-    private Genesis genesis;
+    private final Genesis genesis;
     public ChatListener(Genesis genesis) {
         this.genesis = genesis;
     }

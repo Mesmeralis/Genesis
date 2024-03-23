@@ -10,7 +10,9 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.u410.genesis.commands.*;
 import org.u410.genesis.listeners.ChatListener;
+import org.u410.genesis.listeners.GameWaterListener;
 import org.u410.genesis.listeners.JoinQuitListener;
+import org.u410.genesis.managers.GameManager;
 import org.u410.genesis.utils.ColourUtils;
 
 import java.util.Arrays;
@@ -41,10 +43,13 @@ public final class Genesis extends JavaPlugin {
         Bukkit.getPluginCommand("spawn").setExecutor(new Spawn(this));
         Bukkit.getPluginCommand("forcespawn").setExecutor(new ForceSpawn(this));
         Bukkit.getPluginCommand("gamemode").setExecutor(new Gamemode(this));
+        Bukkit.getPluginCommand("game").setExecutor(new GameCommand(this, new GameManager(this)));
+        Bukkit.getPluginCommand("joingame").setExecutor(new JoinGame(this, new GameManager(this)));
     }
     public void registerEvents() {
         Bukkit.getPluginManager().registerEvents(new JoinQuitListener(this), this);
         Bukkit.getPluginManager().registerEvents(new ChatListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new GameWaterListener(this, new GameManager(this)), this);
     }
 
     public String genesisPrefix() {
