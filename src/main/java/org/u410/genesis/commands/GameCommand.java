@@ -28,9 +28,9 @@ public class GameCommand implements CommandExecutor {
         }
         if(args.length == 3) {
             if(args[0].equalsIgnoreCase("water") && (delay >= 10) && (end >= 10)) {
-                this.manager.runGame("water", delay, end);
+                this.manager.runGame("water", delay);
             } else {
-                Bukkit.broadcastMessage(ColourUtils.colour(this.genesis.genesisPrefix() + "&cGame command error upon startup."));
+                Bukkit.broadcastMessage(ColourUtils.colour(this.genesis.genesisPrefix() + "&c Game command error upon startup."));
             }
         } else {
             return false;

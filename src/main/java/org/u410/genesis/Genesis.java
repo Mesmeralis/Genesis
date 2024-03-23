@@ -13,7 +13,6 @@ import org.u410.genesis.listeners.ChatListener;
 import org.u410.genesis.listeners.GameWaterListener;
 import org.u410.genesis.listeners.JoinQuitListener;
 import org.u410.genesis.managers.GameManager;
-import org.u410.genesis.utils.ColourUtils;
 
 import java.util.Arrays;
 import java.util.List;

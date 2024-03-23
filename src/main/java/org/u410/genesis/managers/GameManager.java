@@ -19,27 +19,17 @@ public class GameManager {
         this.genesis = genesis;
     }
 
-    public void runGame(String gameName, int delay, int until) {
+    public void runGame(String gameName, int delay) {
         if(gameName.equalsIgnoreCase("water")) {
             Bukkit.getServer().broadcastMessage(ColourUtils.colour(this.genesis.genesisPrefix() + " &eThe &d" + gameName + "&e game is starting soon!"));
-            Bukkit.getServer().broadcastMessage(ColourUtils.colour(this.genesis.genesisPrefix() + " &eYou have &a" + delay + "&eseconds to join. Do &d/joingame &eto join!"));
+            Bukkit.getServer().broadcastMessage(ColourUtils.colour(this.genesis.genesisPrefix() + " &eYou have &a" + delay + "&e seconds to join. Do &d/joingame &eto join!"));
             Bukkit.getScheduler().scheduleAsyncDelayedTask(this.genesis, () -> {
                 gameRunning = true;
                 Bukkit.getServer().broadcastMessage(ColourUtils.colour(this.genesis.genesisPrefix() + " &eThe &d" + gameName + "&e game has begun."));
-
             }, delay*20L);
         } else {
             Bukkit.getServer().broadcastMessage(ColourUtils.colour(this.genesis.genesisPrefix() + "&cThe game could not be started as it had an incorrect name."));
         }
     }
-     public BukkitRunnable gameEnding = new BukkitRunnable() {
-        public Genesis genesis;
-        @Override
-        public void run() {
-            gameRunning = false;
-            Bukkit.getServer().broadcastMessage(ColourUtils.colour(this.genesis.genesisPrefix() + " &eThe &d" + gameName + "&e game has ended."));
-            Bukkit.getServer().broadcastMessage(ColourUtils.colour(this.genesis.genesisPrefix() + " &eThe winner is &a" + winner.getName() + "&e!"));
-        }
-     };
 
 }
