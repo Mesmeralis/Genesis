@@ -1,0 +1,5 @@
+genesisPrefix: "&7[&d&lGenesis&7]"
+genesisLoad: " &eLoaded successfully."
+joinMessage: "&e%p% &ajoined the server."
+quitMessage: "&e%p% &cleft the server."
+chatFormat: "%prefix% %p%&7: &f%msg%"

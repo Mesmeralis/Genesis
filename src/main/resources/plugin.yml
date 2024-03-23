@@ -1,0 +1,42 @@
+name: Genesis
+version: '${project.version}'
+main: org.u410.genesis.Genesis
+api-version: '1.20'
+commands:
+  genesisreload:
+    usage: /genesisreload
+    description: Reloads Genesis. Use with caution!
+    permission: genesis.admin
+  sethome:
+    usage: /sethome [name]
+    description: Sets a home at your location.
+    permission: genesis.sethome
+  home:
+    usage: /home [name]
+    description: Teleports you to your home.
+    permission: genesis.home
+  delhome:
+    usage: /delhome [home]
+    description: Deletes your home.
+    permission: genesis.delhome
+  fly:
+    usage: /fly [player]
+    description: Enable/disable flight for yourself or others.
+    permission: genesis.fly
+  setspawn:
+    usage: /setspawn
+    description: Set the server spawn location.
+    permission: genesis.admin
+  spawn:
+    usage: /spawn
+    description: Teleport to the server spawn location.
+  forcespawn:
+    usage: /forcespawn [check]
+    description: Check or set the forced spawn value.
+    permission: genesis.admin
+    aliases: [forcedspawn, fs]
+  gamemode:
+    usage: /gm [gamemode] [user]
+    description: Set yours or another player's gamemode.
+    permission: genesis.gamemode
+    aliases: [gm, mode]
