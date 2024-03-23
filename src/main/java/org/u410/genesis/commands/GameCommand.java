@@ -26,8 +26,8 @@ public class GameCommand implements CommandExecutor {
         if(args.length == 0) {
             player.sendMessage(ColourUtils.colour(this.genesis.genesisPrefix() + " &eThe available games are: &bWater"));
         }
-        if(args.length == 3) {
-            if(args[0].equalsIgnoreCase("water") && (delay >= 10) && (end >= 10)) {
+        if(args.length == 2) {
+            if(args[0].equalsIgnoreCase("water") && (delay >= 10)) {
                 this.manager.runGame("water", delay);
             } else {
                 Bukkit.broadcastMessage(ColourUtils.colour(this.genesis.genesisPrefix() + "&c Game command error upon startup."));
