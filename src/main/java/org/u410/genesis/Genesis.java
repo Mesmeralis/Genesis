@@ -1,5 +1,6 @@
 package org.u410.genesis;
 
+import net.milkbowl.vault.economy.Economy;
 import org.anjocaido.groupmanager.GroupManager;
 import org.anjocaido.groupmanager.dataholder.OverloadedWorldHolder;
 import org.anjocaido.groupmanager.permissions.AnjoPermissionsHandler;
@@ -7,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.u410.genesis.commands.*;
 import org.u410.genesis.listeners.ChatListener;
@@ -21,9 +23,11 @@ public final class Genesis extends JavaPlugin {
 
     public GroupManager groupManager;
     public GameManager gameManager = new GameManager(this);
+    private static Economy econ;
     @Override
     public void onEnable() {
         saveConfig();
+        setupEconomy();
         registerCommands();
         registerEvents();
     }
@@ -114,5 +118,20 @@ public final class Genesis extends JavaPlugin {
         if (handler == null) return null;
 
         return handler.getUserSuffix(player.getName());
+    }
+
+    private void setupEconomy() {
+        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+            return;
+        }
+        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            return;
+        }
+        econ = rsp.getProvider();
+    }
+
+    public static Economy getEconomy() {
+        return econ;
     }
 }

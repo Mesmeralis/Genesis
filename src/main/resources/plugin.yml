@@ -2,6 +2,7 @@ name: Genesis
 version: '${project.version}'
 main: org.u410.genesis.Genesis
 api-version: '1.20'
+depend: [Vault, GroupManager]
 commands:
   genesisreload:
     usage: /genesisreload

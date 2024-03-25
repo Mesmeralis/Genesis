@@ -76,5 +76,11 @@
           <artifactId>groupmanager</artifactId>
           <version>3.2</version>
       </dependency>
+      <dependency>
+          <groupId>com.github.MilkBowl</groupId>
+          <artifactId>VaultAPI</artifactId>
+          <version>1.7</version>
+          <scope>provided</scope>
+      </dependency>
   </dependencies>
 </project>
