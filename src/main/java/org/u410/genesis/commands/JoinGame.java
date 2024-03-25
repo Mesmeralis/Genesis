@@ -11,8 +11,8 @@ import org.u410.genesis.managers.GameManager;
 import org.u410.genesis.utils.ColourUtils;
 
 public class JoinGame implements CommandExecutor {
-    private Genesis genesis;
-    private GameManager manager;
+    private final Genesis genesis;
+    private final GameManager manager;
     public JoinGame(Genesis genesis, GameManager manager) {
         this.genesis = genesis;
         this.manager = manager;
@@ -21,13 +21,15 @@ public class JoinGame implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] arg) {
         Player player = Bukkit.getServer().getPlayer(commandSender.getName());
-        if(!manager.gameRunning ) {
+        if(manager.isGameRunning()) {
+            if(!manager.inGame.contains(player)) {
+              Bukkit.getServer().broadcastMessage(ColourUtils.colour(this.genesis.genesisPrefix() + "&a " + player.getName() + "&e joined the event!"));
+              manager.inGame.add(player);
+            } else {
+                player.sendMessage(ColourUtils.colour(this.genesis.genesisPrefix() + "&c You are already in this event."));
+            }
+        } else {
             player.sendMessage(ColourUtils.colour(this.genesis.genesisPrefix() + "&c There is no game running."));
-        } else if(manager.gameRunning && !manager.inGame.contains(player)) {
-            manager.inGame.add(player);
-            Bukkit.getServer().broadcastMessage(ColourUtils.colour(this.genesis.genesisPrefix() + "&a " + player.getName() + "&e joined the minigame."));
-        } else if(manager.gameRunning && manager.inGame.contains(player)){
-            player.sendMessage(ColourUtils.colour(this.genesis.genesisPrefix() + "&c You are already in this minigame."));
         }
 
         return true;

@@ -9,8 +9,10 @@ import org.jetbrains.annotations.NotNull;
 import org.u410.genesis.Genesis;
 import org.u410.genesis.utils.ColourUtils;
 
+import java.util.Objects;
+
 public class Fly implements CommandExecutor {
-    private Genesis genesis;
+    private final Genesis genesis;
     public Fly(Genesis genesis) {
         this.genesis = genesis;
     }
@@ -19,7 +21,8 @@ public class Fly implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         Player player = Bukkit.getServer().getPlayer(commandSender.getName());
         if(args.length == 0) {
-            if(!player.getAllowFlight() == true) {
+            assert player != null;
+            if(!player.getAllowFlight()) {
                 player.setAllowFlight(true);
                 player.setFlying(true);
                 player.sendMessage(ColourUtils.colour(this.genesis.genesisPrefix() + " &aYou have enabled flight."));
@@ -30,19 +33,22 @@ public class Fly implements CommandExecutor {
             }
         }
         if(args.length == 1) {
-            if(!Bukkit.getServer().getPlayer(args[0]).isOnline()) {
+            if(!Objects.requireNonNull(Bukkit.getServer().getPlayer(args[0])).isOnline()) {
+                assert player != null;
                 player.sendMessage(this.genesis.genesisPrefix() + " &cPlayer &d" + args[0] + " &cis not online.");
             } else {
-                if(!Bukkit.getServer().getPlayer(args[0]).isFlying()) {
-                    Bukkit.getServer().getPlayer(args[0]).setAllowFlight(true);
-                    Bukkit.getServer().getPlayer(args[0]).setFlying(true);
+                if(!Objects.requireNonNull(Bukkit.getServer().getPlayer(args[0])).isFlying()) {
+                    Objects.requireNonNull(Bukkit.getServer().getPlayer(args[0])).setAllowFlight(true);
+                    Objects.requireNonNull(Bukkit.getServer().getPlayer(args[0])).setFlying(true);
+                    assert player != null;
                     player.sendMessage(ColourUtils.colour(this.genesis.genesisPrefix() + " &aYou have enabled flight for &d" + args[0] + "&a."));
-                    Bukkit.getServer().getPlayer(args[0]).sendMessage(ColourUtils.colour(this.genesis.genesisPrefix() + "&aFlight has been enabled for you."));
+                    Objects.requireNonNull(Bukkit.getServer().getPlayer(args[0])).sendMessage(ColourUtils.colour(this.genesis.genesisPrefix() + "&aFlight has been enabled for you."));
                 } else {
-                    Bukkit.getServer().getPlayer(args[0]).setAllowFlight(false);
-                    Bukkit.getServer().getPlayer(args[0]).setFlying(false);
+                    Objects.requireNonNull(Bukkit.getServer().getPlayer(args[0])).setAllowFlight(false);
+                    Objects.requireNonNull(Bukkit.getServer().getPlayer(args[0])).setFlying(false);
+                    assert player != null;
                     player.sendMessage(ColourUtils.colour(this.genesis.genesisPrefix() + " &cYou have disabled flight for &d" + args[0] + "&a."));
-                    Bukkit.getServer().getPlayer(args[0]).sendMessage(ColourUtils.colour(this.genesis.genesisPrefix() + "&cFlight has been disabled for you."));
+                    Objects.requireNonNull(Bukkit.getServer().getPlayer(args[0])).sendMessage(ColourUtils.colour(this.genesis.genesisPrefix() + "&cFlight has been disabled for you."));
                 }
             }
         }

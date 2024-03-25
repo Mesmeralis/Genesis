@@ -20,6 +20,7 @@ import java.util.List;
 public final class Genesis extends JavaPlugin {
 
     public GroupManager groupManager;
+    public GameManager gameManager = new GameManager(this);
     @Override
     public void onEnable() {
         saveConfig();
@@ -42,13 +43,13 @@ public final class Genesis extends JavaPlugin {
         Bukkit.getPluginCommand("spawn").setExecutor(new Spawn(this));
         Bukkit.getPluginCommand("forcespawn").setExecutor(new ForceSpawn(this));
         Bukkit.getPluginCommand("gamemode").setExecutor(new Gamemode(this));
-        Bukkit.getPluginCommand("game").setExecutor(new GameCommand(this, new GameManager(this)));
-        Bukkit.getPluginCommand("joingame").setExecutor(new JoinGame(this, new GameManager(this)));
+        Bukkit.getPluginCommand("game").setExecutor(new GameCommand(this, this.gameManager));
+        Bukkit.getPluginCommand("joingame").setExecutor(new JoinGame(this,this.gameManager));
     }
     public void registerEvents() {
         Bukkit.getPluginManager().registerEvents(new JoinQuitListener(this), this);
         Bukkit.getPluginManager().registerEvents(new ChatListener(this), this);
-        Bukkit.getPluginManager().registerEvents(new GameWaterListener(this, new GameManager(this)), this);
+        Bukkit.getPluginManager().registerEvents(new GameWaterListener(this, this.gameManager), this);
     }
 
     public String genesisPrefix() {

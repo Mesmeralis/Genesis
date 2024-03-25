@@ -41,7 +41,7 @@ commands:
     permission: genesis.gamemode
     aliases: [gm, mode]
   game:
-    usage: /game [name] [delaytime] [endtime]
+    usage: /game [name] [delaytime]
     description: Start a minigame!
     permission: genesis.game
     aliases: [startgame, start]

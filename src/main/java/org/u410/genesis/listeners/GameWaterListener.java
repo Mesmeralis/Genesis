@@ -12,8 +12,8 @@ import org.u410.genesis.managers.GameManager;
 import org.u410.genesis.utils.ColourUtils;
 
 public class GameWaterListener implements Listener {
-    private Genesis genesis;
-    private GameManager manager;
+    private final Genesis genesis;
+    private final GameManager manager;
     public GameWaterListener(Genesis genesis, GameManager manager) {
         this.genesis = genesis;
         this.manager = manager;

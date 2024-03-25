@@ -20,22 +20,18 @@ public class GameCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
-        Player player = Bukkit.getServer().getPlayer(commandSender.getName());
-        int delay = Integer.parseInt(args[1]);
-        int end = Integer.parseInt(args[2]);
-        if(args.length == 0) {
-            player.sendMessage(ColourUtils.colour(this.genesis.genesisPrefix() + " &eThe available games are: &bWater"));
-        }
-        if(args.length == 2) {
-            if(args[0].equalsIgnoreCase("water") && (delay >= 10)) {
-                this.manager.runGame("water", delay);
-            } else {
-                Bukkit.broadcastMessage(ColourUtils.colour(this.genesis.genesisPrefix() + "&c Game command error upon startup."));
-            }
-        } else {
+        if(args.length < 2) {
             return false;
-        }
+        } else {
+                int delay = Integer.parseInt(args[1]);
+                if(args[0].equalsIgnoreCase("water") && (delay >= 10)) {
+                    this.manager.gameName = "water";
+                    this.manager.runGame("water", delay);
+                } else {
+                    Bukkit.getServer().broadcastMessage(ColourUtils.colour(this.genesis.genesisPrefix() + "&c Game command error upon startup."));
+                }
 
+        }
         return true;
     }
 }
