@@ -26,13 +26,13 @@ public class GameWaterListener implements Listener {
             if(manager.inGame.contains(player)) {
                     if(player.getLocation().getBlock().getType() == Material.WATER) {
                         this.manager.winner = player;
-                        Bukkit.getServer().broadcastMessage(ColourUtils.colour(this.genesis.genesisPrefix() + " &eThe &d" + this.manager.gameName + "&e game has ended."));
-                        Bukkit.getServer().broadcastMessage(ColourUtils.colour(this.genesis.genesisPrefix() + " &eThe winner is &a" + this.manager.winner.getName() + "&e!"));
-                        this.genesis.getEconomy().depositPlayer(player, 100);
-                        this.manager.winner.sendMessage(ColourUtils.colour(this.genesis.genesisPrefix() + " &eYou have earned &a100 &ecoins! Your total is now: &a" +
-                                this.genesis.getEconomy().getBalance(player)));
                         this.manager.gameRunning = false;
                         this.manager.inGame.clear();
+                        Bukkit.getServer().broadcastMessage(ColourUtils.colour(this.genesis.genesisPrefix() + " &eThe &d" + this.manager.gameName + "&e game has ended."));
+                        Bukkit.getServer().broadcastMessage(ColourUtils.colour(this.genesis.genesisPrefix() + " &eThe winner is &a" + this.manager.winner.getName() + "&e!"));
+                        Genesis.getEconomy().depositPlayer(player, 100);
+                        this.manager.winner.sendMessage(ColourUtils.colour(this.genesis.genesisPrefix() + " &eYou have earned &a100 &ecoins! Your total is now: &a" +
+                                this.genesis.getEconomy().getBalance(player)));
                     }
             }
         }
